@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+    <!--<properties resource="jdbc.properties"/>-->
+
+    <context id="context" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+       <!-- <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="org.sczs.auction.base.BaseDao"/>
+            <property name="caseSensitive" value="true"/>
+            <property name="forceAnnotation" value="true"/>
+            <property name="beginningDelimiter" value="`"/>
+            <property name="endingDelimiter" value="`"/>
+        </plugin>-->
+
+        <!--通用代码生成器插件 https://gitee.com/free/Mapper/blob/master/wiki/mapper3/11.CodeGenerator.md -->
+        <!--mapper接口-->
+        <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">
+            <property name="targetProject" value="src/main/java"/>
+            <property name="targetPackage" value="dao"/>
+            <property name="templatePath" value="generator/mapper.ftl"/>
+            <property name="fileName" value="${tableClass.shortClassName}${mapperSuffix}.java"/>
+            <property name="mapperSuffix" value="Dao"/>
+        </plugin>
+        <!--mapper.xml-->
+        <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">
+            <property name="targetProject" value="src/main/resources"/>
+            <property name="targetPackage" value="sqlmap"/>
+            <property name="templatePath" value="generator/mapperXml.ftl"/>
+            <property name="fileName" value="${tableClass.shortClassName}${mapperSuffix}.xml"/>
+            <property name="mapperSuffix" value="Dao"/>
+            <property name="mapperPackage" value="dao"/>
+        </plugin>
+        <!--表信息-->
+        <!--<plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">
+            <property name="singleMode" value="false"/>
+            <property name="targetProject" value="src/test/resources"/>
+            <property name="targetPackage" value="./"/>
+            <property name="templatePath" value="generator/test-all.ftl"/>
+            <property name="fileName" value="table-all.txt"/>
+        </plugin>-->
+
+        <!--Service-->
+        <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">
+            <property name="targetProject" value="src/main/java"/>
+            <property name="targetPackage" value="service"/>
+            <property name="templatePath" value="generator/service.ftl"/>
+            <property name="fileName" value="${tableClass.shortClassName}Service.java"/>
+        </plugin>
+        <!--是否在代码中显示注释-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+        <!--数据库链接地址账号密码-->
+        <jdbcConnection userId="root" password="025614"
+                        driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://139.199.25.59:3306/GradeAdministrastion?characterEncoding=UTF-8"/>
+        <!--smallint之类的转化，本项目用不上-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--生成entity类存放位置-->
+        <javaModelGenerator targetPackage="domain" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+        </javaModelGenerator>
+        <!--生成xml映射文件存放位置-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <!--生成mapper类存放位置-->
+        <javaClientGenerator targetPackage="dao" type="XMLMAPPER" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <table tableName="%">
+            <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
+        </table>
+
+    </context>
+</generatorConfiguration>

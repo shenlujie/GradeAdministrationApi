@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.StudentinfoMapper">
+  <resultMap id="BaseResultMap" type="domain.Studentinfo">
+    <id column="Sno" jdbcType="VARCHAR" property="sno" />
+    <result column="Sname" jdbcType="VARCHAR" property="sname" />
+    <result column="Ssex" jdbcType="VARCHAR" property="ssex" />
+    <result column="Sage" jdbcType="VARCHAR" property="sage" />
+    <result column="Sclass" jdbcType="VARCHAR" property="sclass" />
+    <result column="Sdept" jdbcType="VARCHAR" property="sdept" />
+    <result column="Stel" jdbcType="VARCHAR" property="stel" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from studentinfo
+    where Sno = #{sno,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="domain.Studentinfo">
+    insert into studentinfo (Sno, Sname, Ssex, 
+      Sage, Sclass, Sdept, 
+      Stel)
+    values (#{sno,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, #{ssex,jdbcType=VARCHAR}, 
+      #{sage,jdbcType=VARCHAR}, #{sclass,jdbcType=VARCHAR}, #{sdept,jdbcType=VARCHAR}, 
+      #{stel,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="domain.Studentinfo">
+    update studentinfo
+    set Sname = #{sname,jdbcType=VARCHAR},
+      Ssex = #{ssex,jdbcType=VARCHAR},
+      Sage = #{sage,jdbcType=VARCHAR},
+      Sclass = #{sclass,jdbcType=VARCHAR},
+      Sdept = #{sdept,jdbcType=VARCHAR},
+      Stel = #{stel,jdbcType=VARCHAR}
+    where Sno = #{sno,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select Sno, Sname, Ssex, Sage, Sclass, Sdept, Stel
+    from studentinfo
+    where Sno = #{sno,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select Sno, Sname, Ssex, Sage, Sclass, Sdept, Stel
+    from studentinfo
+  </select>
+</mapper>

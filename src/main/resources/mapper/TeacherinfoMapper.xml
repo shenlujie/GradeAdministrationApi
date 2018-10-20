@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.TeacherinfoMapper">
+  <resultMap id="BaseResultMap" type="domain.Teacherinfo">
+    <id column="Tno" jdbcType="VARCHAR" property="tno" />
+    <result column="Tname" jdbcType="VARCHAR" property="tname" />
+    <result column="Tsex" jdbcType="VARCHAR" property="tsex" />
+    <result column="Tage" jdbcType="VARCHAR" property="tage" />
+    <result column="Tel" jdbcType="VARCHAR" property="tel" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from teacherinfo
+    where Tno = #{tno,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="domain.Teacherinfo">
+    insert into teacherinfo (Tno, Tname, Tsex, 
+      Tage, Tel)
+    values (#{tno,jdbcType=VARCHAR}, #{tname,jdbcType=VARCHAR}, #{tsex,jdbcType=VARCHAR}, 
+      #{tage,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="domain.Teacherinfo">
+    update teacherinfo
+    set Tname = #{tname,jdbcType=VARCHAR},
+      Tsex = #{tsex,jdbcType=VARCHAR},
+      Tage = #{tage,jdbcType=VARCHAR},
+      Tel = #{tel,jdbcType=VARCHAR}
+    where Tno = #{tno,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select Tno, Tname, Tsex, Tage, Tel
+    from teacherinfo
+    where Tno = #{tno,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select Tno, Tname, Tsex, Tage, Tel
+    from teacherinfo
+  </select>
+</mapper>

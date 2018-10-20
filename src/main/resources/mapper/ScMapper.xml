@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.ScMapper">
+  <resultMap id="BaseResultMap" type="domain.Sc">
+    <id column="Tno" jdbcType="VARCHAR" property="tno" />
+    <id column="Cno" jdbcType="INTEGER" property="cno" />
+    <id column="Sno" jdbcType="VARCHAR" property="sno" />
+    <result column="Grade" jdbcType="VARCHAR" property="grade" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from sc
+    where Tno = #{tno,jdbcType=VARCHAR}
+      and Cno = #{cno,jdbcType=INTEGER}
+      and Sno = #{sno,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="domain.Sc">
+    insert into sc (Tno, Cno, Sno, 
+      Grade)
+    values (#{tno,jdbcType=VARCHAR}, #{cno,jdbcType=INTEGER}, #{sno,jdbcType=VARCHAR}, 
+      #{grade,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="domain.Sc">
+    update sc
+    set Grade = #{grade,jdbcType=VARCHAR}
+    where Tno = #{tno,jdbcType=VARCHAR}
+      and Cno = #{cno,jdbcType=INTEGER}
+      and Sno = #{sno,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select Tno, Cno, Sno, Grade
+    from sc
+    where Tno = #{tno,jdbcType=VARCHAR}
+      and Cno = #{cno,jdbcType=INTEGER}
+      and Sno = #{sno,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select Tno, Cno, Sno, Grade
+    from sc
+  </select>
+  <select id="selectGrade" resultMap="BaseResultMap">
+    select Tno, Cno, Sno, Grade
+    from sc
+    where Sno = #{sno,jdbcType=VARCHAR}
+  </select>
+</mapper>

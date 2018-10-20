@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.TeachinfoMapper">
+  <resultMap id="BaseResultMap" type="domain.Teachinfo">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="Tid" jdbcType="VARCHAR" property="tid" />
+    <result column="Cid" jdbcType="INTEGER" property="cid" />
+    <result column="Classno" jdbcType="VARCHAR" property="classno" />
+    <result column="Addgrade" jdbcType="INTEGER" property="addgrade" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from teachinfo
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="Id" keyProperty="id" parameterType="domain.Teachinfo" useGeneratedKeys="true">
+    insert into teachinfo (Tid, Cid, Classno, 
+      Addgrade)
+    values (#{tid,jdbcType=VARCHAR}, #{cid,jdbcType=INTEGER}, #{classno,jdbcType=VARCHAR}, 
+      #{addgrade,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="domain.Teachinfo">
+    update teachinfo
+    set Tid = #{tid,jdbcType=VARCHAR},
+      Cid = #{cid,jdbcType=INTEGER},
+      Classno = #{classno,jdbcType=VARCHAR},
+      Addgrade = #{addgrade,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select Id, Tid, Cid, Classno, Addgrade
+    from teachinfo
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select Id, Tid, Cid, Classno, Addgrade
+    from teachinfo
+  </select>
+</mapper>
